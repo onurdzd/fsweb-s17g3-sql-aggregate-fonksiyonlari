@@ -28,13 +28,14 @@ Aşağıda istenilen sonuçlara ulaşabilmek için gerekli SQL sorgularını yaz
 MIN-MAX, COUNT-AVG-SUM, GROUP BY, JOINS (INNER, OUTER, LEFT, RIGHT
 	#ilk 3 soruyu join kullanmadan yazın.
 	1) Öğrencinin adını, soyadını ve kitap aldığı tarihleri listeleyin.
-	
+SELECT ograd,ogrsoyad, atarih FROM ogrenci, islem WHERE ogrenci.ogrno = islem.ogrno;	
 	
 	2) Fıkra ve hikaye türündeki kitapların adını ve türünü listeleyin.
-???	  SELECT kitapadi from kitap where turno in(select turno from tur where trim(turadi)="Fıkra" or trim(turadi)="Hikaye")
-	
+SELECT kitapadi,turadi from kitap,tur where kitap.turno=tur.turno and (trim(turadi)="Fıkra" or trim(turadi)="Hikaye")
+
 	3) 10B veya 10C sınıfındaki öğrencilerin numarasını, adını, soyadını ve okuduğu kitapları listeleyin.
-	
+SELECT o.ogrno,ograd,ogrsoyad,kitapadi from ogrenci as o,islem as i,kitap as k where o.ogrno=i.ogrno and i.kitapno=k.kitapno and (sinif="10B"  or sinif="10C")	
+
 	#join ile yazın
 	4) Öğrencinin adını, soyadını ve kitap aldığı tarihleri listeleyin.
 	 SELECT ograd,ogrsoyad,atarih from ogrenci as o INNER JOIN islem as i on i.ogrno=o.ogrno INNER JOIN kitap as k on k.kitapno=i.kitapno
